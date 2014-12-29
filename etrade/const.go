@@ -4,8 +4,8 @@ const (
 	ETRADE_OAUTH_SERVER = "https://etws.etrade.com"
 	AUTHORIZE_URL       = "https://us.etrade.com/e/t/etws/authorize"
 	ETRADE_SERVER       = "https://etwssandbox.etrade.com"
-	RESPONSE_FORMAT     = "xml"
-	REQUEST_FORMAT      = "json" // It can be "json" or "xml", default is xml+
+	RESPONSE_FORMAT     = ".json"
+	REQUEST_FORMAT      = ".json" // It can be "json" or "xml", default is xml+
 	DEBUG_MODE          = 1
 
 	REQUEST_TOKEN_URL    = ETRADE_OAUTH_SERVER + "/oauth/request_token"
