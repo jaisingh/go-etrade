@@ -63,7 +63,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		config.AccessToken = *accessToken
+		c.Config.AccessToken = *accessToken
 
 		log.Printf("Writing out new config file")
 
@@ -74,16 +74,11 @@ func main() {
 
 	}
 
-	response, err = c.Get(
-		etrade.URL_GETQUOTE+"/AAPL,TW,GLD",
-		map[string]string{"detailFlag": "ALL"},
-		&config.AccessToken)
+	al, err := etrade.GetAccountList(c)
 	if err != nil {
 		log.Println(err)
 	}
-	defer response.Body.Close()
 
-	fmt.Printf("%#v\n", c.Config)
-	fmt.Printf("%#v\n", response)
+	log.Printf("%v\n", al)
 
 }
