@@ -56,17 +56,6 @@ type OauthClient struct {
 	Config OauthConfig
 }
 
-func (c OauthClient) SaveFile(file string) error {
-
-	return nil
-
-}
-
-func (c *OauthClient) Load(file string) error {
-
-	return nil
-}
-
 type OauthConfig struct {
 	ConsumerKey    string
 	ConsumerSecret string

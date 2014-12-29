@@ -3,7 +3,6 @@ package etrade
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 )
 
 // Account module code
@@ -16,17 +15,16 @@ type AccountDetail struct {
 	RegistrationType string      `json:"registrationType"`
 }
 
-func GetAccountDetails(c *OauthClient) (*[]AccountDetail, error) {
-	a := &[]AccountDetail{}
+func GetAccountList(c *OauthClient) (*[]AccountDetail, error) {
+	a := []AccountDetail{}
 	resp, err := c.Get(URL_ACCOUNTLIST+RESPONSE_FORMAT, map[string]string{}, &c.Config.AccessToken)
 	if err != nil {
 		resp.Body.Close()
-		return a, err
+		return &a, err
 	}
 	defer resp.Body.Close()
 
 	data, _ := ioutil.ReadAll(resp.Body)
-	log.Printf("%s\n", data)
 	var tempAcctList struct {
 		JSONListResponse struct {
 			Response []AccountDetail `json:"response"`
@@ -35,8 +33,8 @@ func GetAccountDetails(c *OauthClient) (*[]AccountDetail, error) {
 
 	err = json.Unmarshal(data, &tempAcctList)
 	if err != nil {
-		return a, err
+		return &a, err
 	}
-	a = &tempAcctList.JSONListResponse.Response
-	return a, nil
+	a = tempAcctList.JSONListResponse.Response
+	return &a, nil
 }
