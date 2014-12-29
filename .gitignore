@@ -29,5 +29,5 @@ _testmain.go
 
 cmd/seaport
 
-config.rb
+config.json
 user-data
