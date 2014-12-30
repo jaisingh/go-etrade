@@ -2,9 +2,11 @@ package etrade
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 // Common functions
@@ -35,4 +37,15 @@ func (c *OauthClient) GetUnmarshal(url string, opts map[string]string, v interfa
 	}
 
 	return nil
+}
+
+// DateTime field to handle etrade formatting
+type DateTime struct {
+	time.Time
+}
+
+func (t *DateTime) UnmarshalJSON(b []byte) error {
+	ts, err := time.Parse(DATETIME_FORMAT, fmt.Sprintf("%s", b))
+	t.Time = ts
+	return err
 }

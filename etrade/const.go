@@ -34,4 +34,6 @@ const (
 	URL_PR_CH_OP_ORDER = ETRADE_SERVER + "/order/" + url_str_part + "rest/previewchangeoptionorder"
 	URL_PL_CH_OP_ORDER = ETRADE_SERVER + "/order/" + url_str_part + "rest/placechangeoptionorder"
 	URL_CANCEL_ORDER   = ETRADE_SERVER + "/order/" + url_str_part + "rest/cancelorder"
+
+	DATETIME_FORMAT = `"15:04:05 MST 01-02-2006"`
 )
