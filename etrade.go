@@ -78,7 +78,7 @@ func main() {
 		}
 	}
 
-	al, err := c.GetAccountList()
+	al, err := c.ProductLookup("MSFT", "EQ")
 	if err != nil {
 		log.Println(err)
 	}
