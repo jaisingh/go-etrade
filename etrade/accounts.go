@@ -15,7 +15,7 @@ type AccountDetail struct {
 	RegistrationType string      `json:"registrationType"`
 }
 
-func GetAccountList(c *OauthClient) (*[]AccountDetail, error) {
+func (c *OauthClient) GetAccountList() (*[]AccountDetail, error) {
 	a := []AccountDetail{}
 	resp, err := c.Get(URL_ACCOUNTLIST+RESPONSE_FORMAT, map[string]string{}, &c.Config.AccessToken)
 	if err != nil {
