@@ -78,7 +78,7 @@ func main() {
 		}
 	}
 
-	al, err := c.ProductLookup("MSFT", "EQ")
+	al, err := c.GetQuote("MSFT")
 	if err != nil {
 		log.Println(err)
 	}
