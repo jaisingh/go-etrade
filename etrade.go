@@ -83,6 +83,6 @@ func main() {
 		log.Println(err)
 	}
 
-	log.Printf("%v\n", al)
+	log.Printf("%+v\n", al)
 
 }
