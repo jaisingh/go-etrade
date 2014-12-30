@@ -19,21 +19,16 @@ func (c *OauthClient) ProductLookup(company string, kind string) (*[]Product, er
 	}
 
 	var output []Product
+	url := URL_PRODUCTLOOKUP + RESPONSE_FORMAT
+	opts := map[string]string{
+		"company": company,
+		"type":    kind,
+	}
 
-	resp, err := c.Get(
-		URL_PRODUCTLOOKUP+RESPONSE_FORMAT,
-		map[string]string{
-			"company": company,
-			"type":    kind,
-		},
-		&c.Config.AccessToken)
+	err := c.GetUnmarshal(url, opts, &productLookupResponse)
 	if err != nil {
-		resp.Body.Close()
 		return &output, err
 	}
-	defer resp.Body.Close()
-
-	err = unmarshalResponse(resp, &productLookupResponse)
 	output = productLookupResponse.ProductLookupResponse.ProductList
 	return &output, nil
 }

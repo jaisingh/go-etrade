@@ -41,7 +41,7 @@ func main() {
 	c := etrade.NewOauthClient(config, "http://localhost:8080")
 
 	// Verify token
-	response, err := c.Get(etrade.URL_ACCOUNTLIST, map[string]string{}, &config.AccessToken)
+	response, err := c.Get(etrade.URL_ACCOUNTLIST, map[string]string{})
 	response.Body.Close()
 	if err != nil {
 		accessToken := &oauth.AccessToken{}
