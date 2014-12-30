@@ -7,7 +7,7 @@ package etrade
 type Product struct {
 	CompanyName  string `json:"companyName"`
 	Exchange     string `json:"exchange"`
-	SecurityType string `json:"securityType"`
+	SecurityType string `json:"type"`
 	Symbol       string `json:"symbol"`
 }
 
