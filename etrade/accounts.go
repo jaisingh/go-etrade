@@ -2,6 +2,7 @@ package etrade
 
 // Account module code
 
+// Account details for the list of accounts
 type AccountDetail struct {
 	AccountDesc      string      `json:"accountDesc"`
 	AccountId        int         `json:"accountId"`
@@ -10,6 +11,7 @@ type AccountDetail struct {
 	RegistrationType string      `json:"registrationType"`
 }
 
+// Get the list of account from etrade, return an array of AccountDetails
 func (c *OauthClient) GetAccountList() (*[]AccountDetail, error) {
 	a := []AccountDetail{}
 	var tempAcctList struct {

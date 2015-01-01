@@ -12,6 +12,8 @@ import (
 
 // Oauth Client code
 
+// NewOauthClient takes an OauthConfig object and returns a OauthClient.
+// Optionally a proxy server address can be passed as the second option.
 func NewOauthClient(config OauthConfig, opts ...string) *OauthClient {
 	c := newOauthClient(config.ConsumerKey, config.ConsumerSecret, opts[0])
 	c.Config = config
@@ -51,11 +53,15 @@ func newOauthClient(key string, secret string, opts ...string) *OauthClient {
 
 }
 
+// OauthClient is a holder of the config and functions to access
+// the etrade api.
 type OauthClient struct {
 	oauth.Consumer
 	Config OauthConfig
 }
 
+// OauthConfig is used to store all the credentials needed to authenticate
+// with the etrade api.
 type OauthConfig struct {
 	ConsumerKey    string
 	ConsumerSecret string

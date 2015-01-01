@@ -4,6 +4,7 @@ package etrade
 
 // Look Up Product
 
+// Security product type
 type Product struct {
 	CompanyName  string `json:"companyName"`
 	Exchange     string `json:"exchange"`
@@ -11,6 +12,7 @@ type Product struct {
 	Symbol       string `json:"symbol"`
 }
 
+// Lookup a product by comany name and type, returns an array of Products
 func (c *OauthClient) ProductLookup(company string, kind string) (*[]Product, error) {
 	var productLookupResponse struct {
 		ProductLookupResponse struct {
@@ -35,6 +37,8 @@ func (c *OauthClient) ProductLookup(company string, kind string) (*[]Product, er
 
 // Get Quote
 
+// QuoteData for the looking up quotes, all the fields are implemented
+// but there needs to be some more work to handle the different requests
 type QuoteData struct {
 	All struct {
 		AdjNonAdjFlag    bool    `json:"adjNonAdjFlag"`
@@ -86,6 +90,7 @@ type QuoteData struct {
 	DateTime DateTime `json:"dateTime"`
 }
 
+// Get the current quote information for a product, returns QuoteData
 func (c *OauthClient) GetQuote(symbol string, detailFlag ...string) (*QuoteData, error) {
 	q := QuoteData{}
 	url := URL_GETQUOTE + "/" + symbol + RESPONSE_FORMAT
