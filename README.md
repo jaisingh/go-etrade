@@ -1,6 +1,6 @@
 Go bindings for the etrade api
 
-Look at etradego for a sample
+Look at etrade.go for a samples
 
 API's currently implemented
 ===========================
