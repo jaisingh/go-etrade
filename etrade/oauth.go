@@ -14,6 +14,13 @@ import (
 
 // NewOauthClient takes an OauthConfig object and returns a OauthClient.
 // Optionally a proxy server address can be passed as the second option.
+//	c := etrade.NewOauthClient(
+//		OauthConfig{
+//			ConsumerKey:    "",
+//			ConsumerSecret: "",
+//			AccessToken:    oauth.AccessToken{"", ""},
+//		},
+//	)
 func NewOauthClient(config OauthConfig, opts ...string) *OauthClient {
 	c := newOauthClient(config.ConsumerKey, config.ConsumerSecret, opts[0])
 	c.Config = config
