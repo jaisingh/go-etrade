@@ -38,17 +38,17 @@ func main() {
 		log.Fatal(err)
 	}
 
-	c := etrade.NewOauthClient(config, "http://localhost:8080")
+	client := etrade.NewOauthClient(config, "http://localhost:8080")
 
 	// Verify token
-	response, err := c.Get(etrade.URL_ACCOUNTLIST, map[string]string{})
-	response.Body.Close()
+	_, err = client.Get(etrade.URL_ACCOUNTLIST, map[string]string{})
+
 	if err != nil {
 		accessToken := &oauth.AccessToken{}
-		accessToken, err = c.RefreshToken(&c.Config.AccessToken)
+		accessToken, err = client.RefreshToken(&client.Config.AccessToken)
 		if err != nil {
 			log.Println(err)
-			requestToken, url, err := c.GetRequestTokenAndUrl("oob")
+			requestToken, url, err := client.GetRequestTokenAndUrl("oob")
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -63,22 +63,22 @@ func main() {
 
 			fmt.Scanln(&verificationCode)
 
-			accessToken, err = c.AuthorizeToken(requestToken, verificationCode)
+			accessToken, err = client.AuthorizeToken(requestToken, verificationCode)
 			if err != nil {
 				log.Fatal(err)
 			}
 		}
-		c.Config.AccessToken = *accessToken
+		client.Config.AccessToken = *accessToken
 
 		log.Printf("Writing out new config file")
 
-		data, _ := json.MarshalIndent(c.Config, "", "  ")
+		data, _ := json.MarshalIndent(client.Config, "", "  ")
 		if err := ioutil.WriteFile("config.json", data, 0644); err != nil {
 			log.Fatal(err)
 		}
 	}
 
-	al, err := c.GetQuote("MSFT")
+	al, err := client.GetQuote("MSFT")
 	if err != nil {
 		log.Println(err)
 	}
